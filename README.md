@@ -4,7 +4,7 @@ ROS code written in COSC 081 21F. Descriptions of each file below.
 
 # Random Walk
 
-The program that I completed for programming assignment 0 executes a random walk for a robot in an arbitrary environment. The robot moves forward with constant velocity in a straight line until it encounters some object within a particular threshold distance. At this point, the robot rotates to a random angle, doing so until there is no longer an object within the threshold distance. Then, it proceeds to move forward once more. The robot will move as such for an indefinite amount of time.
+This program executes a random walk for a robot in an arbitrary environment. The robot moves forward with constant velocity in a straight line until it encounters some object within a particular threshold distance. At this point, the robot rotates to a random angle, doing so until there is no longer an object within the threshold distance. Then, it proceeds to move forward once more. The robot will move as such for an indefinite amount of time.
 
 The specific parts of the program that I coded were (a) identifying whether an object was within the robot’s minimum threshold distance and (b) having the robot move forwards without an object in its path and rotating when there is. To identify whether there is an object in the robot’s path, I first took the array of scans and found the indices within that array at which our robot’s parameterized minimum and maximum scan angles are located. It is inside this slice of the array that our robot can actually see. So, within this slice, we need to know if there is an object or not. I located the closest object by taking the minimum of that slice. I made the min/max scan angles 45 degrees in each direction to allow for a wider field of vision. If that minimum is less than our minimum threshold distance, then I set our boolean for ‘close object’ to true. I made the minimum threshold distance 0.5 meters so the robot would have enough foresight to rotate appropriately if indeed there was an object within that range.
 
@@ -13,7 +13,7 @@ angular velocity of pi for however long it takes to reach the desired angle. I m
 
 # Polygon Problem
 
-PA1 asked us to program a robot to follow the path of various shapes. The first subproblem to solve was building a trapezoid. Given a radius and angle, my robot is able to draw a corresponding trapezoid. It does so by calculating the coordinates of the trapezoid vertices using right triangle geometry. But how does the robot actually reach those coordinates? My program routinely checks the robot’s current location and angle of orientation against its desired location and continues to move within a particular margin of error until it reaches a given point at a given angle. Then, it selects the next point and executes the same function.
+This program directs a robot to follow the path of various shapes. The first subproblem to solve was building a trapezoid. Given a radius and angle, my robot is able to draw a corresponding trapezoid. It does so by calculating the coordinates of the trapezoid vertices using right triangle geometry. But how does the robot actually reach those coordinates? My program routinely checks the robot’s current location and angle of orientation against its desired location and continues to move within a particular margin of error until it reaches a given point at a given angle. Then, it selects the next point and executes the same function.
 
 To draw a ‘D’, however, was slightly more challenging because it invoked a curve. Instead of reducing the error between its desired location/angle and its current location/angle, to draw a curve, my program calculates the time it will need to move before reaching the end of an arc. It moves at a linear velocity equal to the angular velocity times the radius to achieve this.
 
@@ -39,7 +39,7 @@ I then calculated the robot's pose at each step in its path based on its quatern
 
 # Occupancy Grid
 
-Our objective in this programming assignment was primarily to write algorithms that operate the RosBot. We did this in two parts: (1) estimating the robot's state using LIDAR and (2) mapping an occupancy grid of the robot's surrounding environment. These two programs are described below.
+My objective in this program was primarily to write algorithms that operate the RosBot. I did this in two parts: (1) estimating the robot's state using LIDAR and (2) mapping an occupancy grid of the robot's surrounding environment. These two programs are described below.
 
 To estimate the robot's state, I first programmed the robot to move in three different ways: (a) translation, (b) relative rotation, and (c) absolute rotation. The code for translation and relative rotation was relatively straightforward as all I had to do was adapt it from past programming assignments. Programming an absolute rotation, however, was slightly more complex because I had to capture the robot's pose in the odom from, then subtract its yaw from the desired angle. After doing so, however, the robot rotated properly.
 
